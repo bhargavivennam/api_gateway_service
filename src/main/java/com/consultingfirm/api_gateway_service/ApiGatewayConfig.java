@@ -14,10 +14,13 @@ public class ApiGatewayConfig {
     @Bean
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route(p -> p.path("/api/users/**","/swagger-ui/**","/v3/api-docs/**")
+                .route(p -> p.path("/test/**", "/subdrive/**" ,"/swagger-ui/**","/v3/api-docs/**")
                         .filters(GatewayFilterSpec::tokenRelay)
-//                        .uri("http://localhost:9090")) //user details microservice port number
-                        .uri("lb://user-details-api"))
+                        .uri("http://localhost:9091")) //user details microservice port number
+//                        .uri("lb://subdrive-rentals"))
+                .route(p -> p.path("/oauth2/authorization/keycloak")
+                        .filters(GatewayFilterSpec::tokenRelay)
+                        .uri("http://localhost:8080")) // Keycloak OAuth2 login endpoint
                 .build();
     }
 }

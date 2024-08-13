@@ -14,9 +14,9 @@ public class ApiGatewayConfig {
     @Bean
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route(p -> p.path("/test/**", "/subdrive/**" ,"/swagger-ui/**","/v3/api-docs/**", "/h2-console/**")
+                .route(p -> p.path("/test/**", "/subdrive/**" ,"/swagger-ui/**","/v3/api-docs/**", "/h2-console/**", "/api/cars/**")
                         .filters(GatewayFilterSpec::tokenRelay)
-                        .uri("http://localhost:9091")) //user details microservice port number
+                        .uri("http://localhost:9091")) //subdrive microservice port number
 //                        .uri("lb://subdrive-rentals"))
                 .route(p -> p.path("/oauth2/authorization/keycloak")
                         .filters(GatewayFilterSpec::tokenRelay)
